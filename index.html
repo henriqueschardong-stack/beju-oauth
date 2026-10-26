@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BeJu — callback OAuth</title>
+<style>
+body{font-family:system-ui,sans-serif;padding:20px;line-height:1.6}
+h1{font-size:18px}.l{color:#666;font-size:12px;text-transform:uppercase;margin:16px 0 2px}
+code{display:block;background:#f4f4f4;padding:10px;border-radius:8px;word-break:break-all;font-size:13px}
+button{margin-top:8px;padding:8px 14px;border:1px solid #ccc;background:#fff;border-radius:8px}
+.w{background:#fff4e5;border:1px solid #ffd8a8;padding:10px;border-radius:8px;font-size:13px;margin-top:20px}
+</style></head><body>
+<h1>BeJu — callback OAuth Shopee</h1>
+<div id="o"></div>
+<script>
+const p=new URLSearchParams(location.search),o=document.getElementById('o');
+function add(l,v){
+ const a=document.createElement('p');a.className='l';a.textContent=l;o.appendChild(a);
+ const c=document.createElement('code');c.textContent=v;o.appendChild(c);
+ const b=document.createElement('button');b.textContent='copiar';
+ b.onclick=function(){navigator.clipboard.writeText(v);b.textContent='copiado';};o.appendChild(b);
+}
+if(!location.search){o.innerHTML='<p>Nenhum parâmetro na URL. Esta página serve só como destino do redirect.</p>';}
+else{
+ add('url completa',location.href);
+ ['code','shop_id','main_account_id','state','error','message'].forEach(function(k){if(p.has(k))add(k,p.get(k));});
+ const w=document.createElement('div');w.className='w';
+ w.textContent='O code é de uso único e vence em minutos. Copie agora e NÃO cole em chat.';
+ o.appendChild(w);
+}
+</script></body></html>
